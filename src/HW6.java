@@ -89,6 +89,7 @@ public class HW6 extends JFrame{
                         break;
 
                     case 2:
+                        status_JLabel.setText("目前功能：移除選取         魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
                         break;
 
                     case 3:
@@ -142,6 +143,7 @@ public class HW6 extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 current_function = 2;
                 setBtnColor();
+                status_JLabel.setText("目前功能：移除選取         魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
             }
         });
 
