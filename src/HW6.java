@@ -151,6 +151,7 @@ public class HW6 extends JFrame{
                 turtle_ArrayList.clear();
                 fishBowl_JPanel.removeAll();
                 fishBowl_JPanel.repaint();
+                executorService.shutdownNow();
                 status_JLabel.setText("目前功能：移除全部         魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
             }
         });
