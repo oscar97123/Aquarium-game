@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
 
+/*
+ * 資管4A
+ * 105403031  莫智堯
+ */
+
 public class turtle implements Runnable{
     private final JPanel fishBowl_JPanel;
     private final JLabel Turtle_JLabel;

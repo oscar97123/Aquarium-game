@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.concurrent.RejectedExecutionException;
 
+/*
+ * 資管4A
+ * 105403031  莫智堯
+ */
+
 public class fish implements Runnable {
     private final JPanel fishBowl_JPanel;
     private final JLabel Fish_JLabel;

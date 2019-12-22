@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/*
+ * 資管4A
+ * 105403031  莫智堯
+ */
+
 public class HW6 extends JFrame{
     private final JButton newFish_Btn;
     private final JButton newTurtle_Btn;
