@@ -75,7 +75,7 @@ public class HW6 extends JFrame{
 
                     case 1:
                         JLabel Turtle_JLabel = new JLabel();
-                        turtle turtle = new turtle(mouse_X_point, mouse_Y_point, Turtle_JLabel);
+                        turtle turtle = new turtle(mouse_X_point, mouse_Y_point, Turtle_JLabel, fishBowl_JPanel);
                         fishBowl_JPanel.add(Turtle_JLabel); //把魚的JLabel放在水族箱JPanel裡
                         turtle_ArrayList.add(Turtle_JLabel); //用ArrayList把新的turtle 記錄起來
                         executorService.execute(turtle);
@@ -152,6 +152,7 @@ public class HW6 extends JFrame{
                 fishBowl_JPanel.removeAll();
                 fishBowl_JPanel.repaint();
                 executorService.shutdownNow();
+                executorService = Executors.newCachedThreadPool();
                 status_JLabel.setText("目前功能：移除全部         魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
             }
         });
