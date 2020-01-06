@@ -23,6 +23,7 @@ public class fish implements Runnable {
     private int fish_height = 60; //魚的最小高度為60
     private int x_position_now;
     private int count;
+    private int fish_current_width, fish_current_height;
 
     public fish(int x, int y, JLabel Fish_JLabel, JPanel fishBowl_JPanel){
         this.fishBowl_JPanel = fishBowl_JPanel;
@@ -47,6 +48,9 @@ public class fish implements Runnable {
     }
 
     private void random_fish_size_n_direction(int width, int height, int direction_int) {
+
+        fish_current_width = width;
+        fish_current_height = height;
 
         if (direction_int == 0) { //如果input數字是0，魚頭向左
 
@@ -106,8 +110,9 @@ public class fish implements Runnable {
 
                     //重新決定方向
                     fish_direction = secureRandom.nextInt(2);
-                    random_fish_size_n_direction(fish_width, fish_height, fish_direction); //套回function 改變魚頭的方向
+                    random_fish_size_n_direction(fish_current_width -10, fish_current_height -10, fish_direction); //套回function 改變魚頭的方向 + 體型會變小
                     //
+
 
                     count = 0; //重算
                 }
