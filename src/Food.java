@@ -86,13 +86,13 @@ public class Food implements Runnable{
                 }
 
                 turtle_reach_border(); //當烏龜到達邊界時
-/*
+
                 if (count == 300){ //執行第300次, 飼料消失
 
+                    /**********Terminate thread************/
 
                 }
-                
- */
+
 
                 Thread.sleep(randomSpeed); //以thread sleep來控制烏龜的速度
             }

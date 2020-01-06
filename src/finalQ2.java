@@ -109,8 +109,8 @@ public class finalQ2 extends JFrame{
                         fishBowl_JPanel.add(Food_JLabel); //把魚的JLabel放在水族箱JPanel裡
                         turtle_ArrayList.add(Food_JLabel); //用ArrayList把新的turtle 記錄起來
                         executorService.execute(food);
-                        status_JLabelsetText();
                         Food_count++;
+                        status_JLabelsetText();
                         break;
 
                     case 3:
@@ -118,8 +118,8 @@ public class finalQ2 extends JFrame{
                         break;
 
                     case 4:
-                        status_JLabelsetText();
                         Fishing_count++;
+                        status_JLabelsetText();
                         break;
                 }
             }
