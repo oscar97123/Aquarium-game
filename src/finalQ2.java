@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
  * 105403031  莫智堯
  */
 
-public class HW6 extends JFrame{
+public class finalQ2 extends JFrame{
     private final JButton newFish_Btn;
     private final JButton newTurtle_Btn;
     private final JButton removeSelected_Btn;
@@ -29,7 +29,7 @@ public class HW6 extends JFrame{
     private int fish_count = 0; //記錄建立了多少條魚
     private int Turtle_count = 0;
 
-    public HW6(){
+    public finalQ2(){
         super("FishBowl");
 
         fishBowl_JPanel = new JPanel();

@@ -5,11 +5,11 @@ import javax.swing.*;
  * 105403031  莫智堯
  */
 
-public class Main extends HW6{
+public class Main extends finalQ2 {
     public static void main(String[] args){
-        HW6 HW6_drawer = new HW6();
-        HW6_drawer.setSize(800, 700);
-        HW6_drawer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        HW6_drawer.setVisible(true);
+        finalQ2 finalQ2_drawer = new finalQ2();
+        finalQ2_drawer.setSize(800, 700);
+        finalQ2_drawer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        finalQ2_drawer.setVisible(true);
     }
 }
