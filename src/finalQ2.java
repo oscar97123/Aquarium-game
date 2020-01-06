@@ -16,8 +16,10 @@ import java.util.concurrent.Executors;
 public class finalQ2 extends JFrame{
     private final JButton newFish_Btn;
     private final JButton newTurtle_Btn;
-    private final JButton removeSelected_Btn;
+    private final JButton newFood_Btn;
     private final JButton removeAllElement_Btn;
+    private final JButton fishing_Btn;
+    private JPanel topPanel;
     private JLabel status_JLabel;
     private JPanel fishBowl_JPanel;
     private JPanel menu_JPanel;
@@ -28,6 +30,11 @@ public class finalQ2 extends JFrame{
     private ArrayList<JLabel> turtle_ArrayList = new ArrayList<JLabel>();
     private int fish_count = 0; //記錄建立了多少條魚
     private int Turtle_count = 0;
+    private int Food_count = 0;
+    private int Fishing_count = 0;
+    private String current_function_name;
+    private int FishGetCaught_count = 0;
+    private int TurtleGetCaught_count = 0;
 
     public finalQ2(){
         super("FishBowl");
@@ -37,24 +44,32 @@ public class finalQ2 extends JFrame{
         fishBowl_JPanel.setBackground(Color.decode("#84D8F7")); //設定背景顏色，讓水族箱的顏色像海水顏色
         fishBowl_JPanel_Mouse_tracking();
 
+        topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
+
         menu_JPanel = new JPanel();
         menu_JPanel.setLayout(new GridLayout(3, 2));
 
         newFish_Btn = new JButton("新增魚");
         newTurtle_Btn = new JButton("新增烏龜");
-        removeSelected_Btn = new JButton("移除選取");
+        newFood_Btn = new JButton("新增飼料");
         removeAllElement_Btn = new JButton("移除全部");
-        status_JLabel = new JLabel("目前功能：null            魚數量：0  烏龜數量：0");
+        fishing_Btn = new JButton("新增釣竿");
+        status_JLabel = new JLabel("目前功能：null            魚數量：0  烏龜數量：0  飼料數量：0  釣竿數量：0  已釣到的魚數量：0" +
+                "  已釣到烏龜數量：0");
 
         button_OnClick();
 
         menu_JPanel.add(newFish_Btn);
-        menu_JPanel.add(removeSelected_Btn);
+        menu_JPanel.add(newFood_Btn);
         menu_JPanel.add(newTurtle_Btn);
         menu_JPanel.add(removeAllElement_Btn);
-        menu_JPanel.add(status_JLabel);
+        menu_JPanel.add(fishing_Btn);
 
-        add(menu_JPanel, BorderLayout.NORTH);
+        topPanel.add(menu_JPanel, BorderLayout.CENTER);
+        topPanel.add(status_JLabel, BorderLayout.SOUTH);
+
+        add(topPanel, BorderLayout.NORTH);
         add(fishBowl_JPanel, BorderLayout.CENTER);
     }
 
@@ -75,7 +90,7 @@ public class finalQ2 extends JFrame{
                         fish_ArrayList.add(Fish_JLabel); //用ArrayList把新的fish 記錄起來
                         executorService.execute(fish);
                         fish_count++;
-                        status_JLabel.setText("目前功能：新增魚            魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
+                        status_JLabelsetText();
                         break;
 
                     case 1:
@@ -85,14 +100,26 @@ public class finalQ2 extends JFrame{
                         turtle_ArrayList.add(Turtle_JLabel); //用ArrayList把新的turtle 記錄起來
                         executorService.execute(turtle);
                         Turtle_count++;
-                        status_JLabel.setText("目前功能：新增烏龜         魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
+                        status_JLabelsetText();
                         break;
 
                     case 2:
-                        status_JLabel.setText("目前功能：移除選取         魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
+                        JLabel Food_JLabel = new JLabel();
+                        Food food = new Food(mouse_X_point, mouse_Y_point, Food_JLabel, fishBowl_JPanel);
+                        fishBowl_JPanel.add(Food_JLabel); //把魚的JLabel放在水族箱JPanel裡
+                        turtle_ArrayList.add(Food_JLabel); //用ArrayList把新的turtle 記錄起來
+                        executorService.execute(food);
+                        status_JLabelsetText();
+                        Food_count++;
                         break;
 
                     case 3:
+                        status_JLabelsetText();
+                        break;
+
+                    case 4:
+                        status_JLabelsetText();
+                        Fishing_count++;
                         break;
                 }
             }
@@ -125,7 +152,8 @@ public class finalQ2 extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 current_function = 0;
                 setBtnColor();
-                status_JLabel.setText("目前功能：新增魚            魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
+                current_function_name = "新增魚";
+                status_JLabelsetText();
             }
         });
 
@@ -134,16 +162,18 @@ public class finalQ2 extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 current_function = 1;
                 setBtnColor();
-                status_JLabel.setText("目前功能：新增烏龜         魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
+                current_function_name = "新增烏龜";
+                status_JLabelsetText();
             }
         });
 
-        removeSelected_Btn.addActionListener(new ActionListener() {
+        newFood_Btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 current_function = 2;
                 setBtnColor();
-                status_JLabel.setText("目前功能：移除選取         魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
+                current_function_name = "新增飼料";
+                status_JLabelsetText();
             }
         });
 
@@ -154,22 +184,43 @@ public class finalQ2 extends JFrame{
                 setBtnColor();
                 fish_count = 0;
                 Turtle_count = 0;
+                Food_count = 0;
+                FishGetCaught_count = 0;
+                TurtleGetCaught_count = 0;
+                Fishing_count = 0;
                 fish_ArrayList.clear();
                 turtle_ArrayList.clear();
                 fishBowl_JPanel.removeAll();
                 fishBowl_JPanel.repaint();
                 executorService.shutdownNow();
                 executorService = Executors.newCachedThreadPool();
-                status_JLabel.setText("目前功能：移除全部         魚數量：" + fish_count + "   烏龜數量：" + Turtle_count);
+                current_function_name = "移除全部";
+                status_JLabelsetText();
             }
         });
+
+        fishing_Btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                current_function = 4;
+                setBtnColor();
+                current_function_name = "新增釣竿";
+                status_JLabelsetText();
+            }
+        });
+    }
+
+    private void status_JLabelsetText() {
+        status_JLabel.setText("目前功能："+ current_function_name + "            魚數量：" + fish_count + "  烏龜數量：" + Turtle_count
+        + "  飼料數量：" + Food_count + "  釣竿數量：" + Fishing_count + "  已釣到的魚數量：" + FishGetCaught_count + "  已釣到烏龜數量：" + TurtleGetCaught_count);
     }
 
     private void setBtnColor() {
         newFish_Btn.setForeground(Color.BLACK);
         newTurtle_Btn.setForeground(Color.BLACK);
-        removeSelected_Btn.setForeground(Color.BLACK);
+        newFood_Btn.setForeground(Color.BLACK);
         removeAllElement_Btn.setForeground(Color.BLACK);
+        fishing_Btn.setForeground(Color.BLACK);
 
 
         switch (current_function){
@@ -182,11 +233,15 @@ public class finalQ2 extends JFrame{
                 break;
 
             case 2:
-                removeSelected_Btn.setForeground(Color.RED);
+                newFood_Btn.setForeground(Color.RED);
                 break;
 
             case 3:
                 removeAllElement_Btn.setForeground(Color.RED);
+                break;
+
+            case 4:
+                fishing_Btn.setForeground(Color.RED);
                 break;
         }
     }
