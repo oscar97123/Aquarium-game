@@ -118,6 +118,11 @@ public class finalQ2 extends JFrame{
                         break;
 
                     case 4:
+                        JLabel Fishing_JLabel = new JLabel();
+                        Fishing fishing = new Fishing(mouse_X_point, mouse_Y_point, Fishing_JLabel, fishBowl_JPanel);
+                        fishBowl_JPanel.add(Fishing_JLabel); //把魚的JLabel放在水族箱JPanel裡
+                        turtle_ArrayList.add(Fishing_JLabel); //用ArrayList把新的turtle 記錄起來
+                        executorService.execute(fishing);
                         Fishing_count++;
                         status_JLabelsetText();
                         break;
